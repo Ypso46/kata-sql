@@ -19,18 +19,17 @@ vous sembler utiles dans le but qu'une autre personne puisse **reproduire**
 votre démarche.
 -->
 
-Voici les étapes que j'ai suivies pour installer XXX, créer une base de données
+Voici les étapes que j'ai suivies pour installer un docker, créer une base de données
 et y importer les tables :
-  1. ...
-  1. ...
-  1. ...
-  1. ...
+  1. j'ai créé un docker file qui n'a qu'une simple db MariaDB, avec les ports 3306 ouverts pour s'y connecter avec un client;
+  1. j'ai paramétré les volumes pour qu'un dossier "MyMariaDB" soit créé et contienne la db. La db se créée automatiquement grâce au ```shell /docker-entrypoint-initdb.d```. Cela prend les fichiers .sql qui sont dans le dossier "sql";
+  1. il ne reste plus qu'à faire un simple ```shell docker compose up -d``` pour créer le docker.
 
-J'ai choisi d'utiliser XXX comme client de base de données.
+J'ai choisi d'utiliser DBeaver comme client de base de données.
 
-J'ai généré le schéma avec XXX:
+J'ai généré le schéma avec https://dbdiagram.io/d:
 
-![Mon MLD](schema.jpg "Mon MLD généré avec XXX")
+![Mon MLD](schema.png "Mon MLD généré avec https://dbdiagram.io/d")
 
 ## Informations à récolter
 
@@ -53,44 +52,44 @@ J'ai généré le schéma avec XXX:
 1. Les 5 premières entrées de la table `people` triée par nom de famille en 
    ordre croissant sont :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people ORDER BY lastname ASC LIMIT 5;
   ```
 1. Je trouve toutes les personnes dont le nom ou le prénom contient `ojo`, ma  
    requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people WHERE lastname LIKE "%ojo%";
   ```
 1. Les 5 personnes les plus jeunes sont obtenues avec cette requête :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people ORDER BY birthdate DESC LIMIT 5;
   ```
 1. Les 5 personnes les plus agées sont obtenues avec cette requête :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people ORDER BY birthdate ASC LIMIT 5;
   ```
 1. La requête suivante permet de trouver l'age (en année) de chaque personne :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT *, (YEAR(NOW()) - YEAR(birthdate)) as age FROM people;
   ```
-1. La moyenne d'age (en année) est `NUMBER`, ma requête est :  
+1. La moyenne d'age (en année) est `29`, ma requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT AVG(YEAR(NOW())-YEAR(birthdate)) as Average from people;
   ```
-1. Le prénom le plus long est `TEXT`, ma requête est :  
+1. Le prénom le plus long est `Clementine`, ma requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT firstname FROM people ORDER BY LENGTH(firstname) DESC LIMIT 1;
   ```
-1. Le nom de famille le plus long est `TEXT`, ma requête est:  
+1. Le nom de famille le plus long est `Christensen`, ma requête est:  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT lastname FROM people ORDER BY LENGTH(lastname) DESC LIMIT 1;
   ```
-1. La plus longue paire "nom + prénom" est `TEXT`, ma requête est :  
+1. La plus longue paire "nom + prénom" est `Cheyenne Pennington`, ma requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT firstname, lastname FROM people ORDER BY (LENGTH(firstname) + LENGTH(lastname)) DESC LIMIT 1;
   ```
-1. La table `people` contient `NUMBER` doublons, ma requête est :  
+1. La table `people` contient `10` doublons, ma requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT firstname, lastname, COUNT(*) FROM people GROUP BY firstname, lastname HAVING COUNT(*) > 1;;
   ```
 
 ### Invitations
