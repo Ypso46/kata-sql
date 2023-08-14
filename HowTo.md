@@ -19,18 +19,18 @@ vous sembler utiles dans le but qu'une autre personne puisse **reproduire**
 votre démarche.
 -->
 
-Voici les étapes que j'ai suivies pour installer XXX, créer une base de données
+Voici les étapes que j'ai suivies pour installer un docker, créer une base de données
 et y importer les tables :
-  1. ...
-  1. ...
-  1. ...
-  1. ...
+  1. j'ai fait un docker file avec une simple db MariaDB;
+  1. ce docker file prend automatiquement les tables qui se trouvent dans le .sql du dossier et les ajoutent à la db qu'il créé;
+  1. j'utilise DBeaver pour me connecter à la db avec les infos de connexions mentionnées dans le docker file;
+  1. il n'y a donc qu'à faire un simple ```shell docker compose up -d ``` et le tour est joué.
 
-J'ai choisi d'utiliser XXX comme client de base de données.
+J'ai choisi d'utiliser DBeaver comme client de base de données.
 
-J'ai généré le schéma avec XXX:
+J'ai généré le schéma avec https://dbdiagram.io/d :
 
-![Mon MLD](schema.jpg "Mon MLD généré avec XXX")
+![Mon MLD](schema.jpeg "Mon MLD généré avec https://dbdiagram.io/d")
 
 ## Informations à récolter
 
