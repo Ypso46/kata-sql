@@ -89,14 +89,14 @@ J'ai généré le schéma avec https://dbdiagram.io/d:
   ```
 1. La table `people` contient `10` doublons, ma requête est :  
   ```sql
-  SELECT firstname, lastname, COUNT(*) FROM people GROUP BY firstname, lastname HAVING COUNT(*) > 1;;
+  SELECT firstname, lastname, COUNT(*) FROM people GROUP BY firstname, lastname HAVING COUNT(*) > 1;
   ```
 
 ### Invitations
 
 1. Pour lister tous les membres de plus de 18 ans :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT *, (YEAR(NOW()) - YEAR(birthdate)) as age FROM people WHERE (YEAR(NOW()) - YEAR(birthdate)) >= 18 ORDER BY age;
   ```
 1. Pour lister tous les membres de plus de 18 ans et de moins de 60 ans :  
   ```sql
