@@ -36,19 +36,19 @@ J'ai généré le schéma avec XXX:
 
 ### Générales
 
-1. La table `people` contient `NUMBER` personnes, ma requête est :  
+1. La table `people` contient 410 personnes, ma requête est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people;
   ```
 1. Cette requête permet de trouver l'email de la personne dont le nom de
    famille est "Warren" :
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT email FROM people WHERE lastname LIKE "%warren%";
   ```
 1. La table `people` est triée par nom de famille en ordre croissant, ma requête 
    est :  
   ```sql
-  SELECT somecolumns FROM sometable [...];
+  SELECT * FROM people ORDER BY lastname ASC;;
   ```
 1. Les 5 premières entrées de la table `people` triée par nom de famille en 
    ordre croissant sont :  
